@@ -1,0 +1,55 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-12">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0">Tasks List</h5>
+        <button class="btn btn-primary" (click)="openNewTaskPage()">Add Task</button>
+      </div>
+      <table class="table table-bordered no-vertical-borders table-hover text-center">
+        <thead class="table-primary">
+          <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Assigned To</th>
+            <th>Status</th>
+            <th>priority</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of filteredTasks">
+            <td>{{ task.id }}</td>
+            <td>{{ task.title }}</td>
+            <td>
+              <select [(ngModel)]="task.assignedTo" (ngModelChange)="onAssigneeChange(task, $event)" id="assigneeDropdown" (change)="checkCounts()"
+                     class="form-select form-select-sm w-auto align-items-center d-flex justify-content-center mx-auto" style="margin-bottom: 5px">
+               <option *ngFor="let assignee of assignees" [value]="assignee">
+                 {{ assignee }}
+               </option>
+              </select>
+            </td>
+            <td>
+              <select [(ngModel)]="task.status" (ngModelChange)="onStatusChange(task, $event)" id="statusDropdown" (change)="checkCounts()"
+                      class="form-select form-select-sm w-auto align-items-center d-flex justify-content-center mx-auto" style="margin-bottom: 5px">
+                <option *ngFor="let status of statuses" [value]="status">
+                  {{ status }}
+                </option>
+              </select>
+            </td>
+            <td>
+              <select [(ngModel)]="task.priority" (ngModelChange)="onPriorityChange(task, $event)" id="priorityDropdown" (change)="checkCounts()"
+                      class="form-select form-select-sm w-auto align-items-center d-flex justify-content-center mx-auto" style="margin-bottom: 5px">
+                <option *ngFor="let priority of priorities" [value]="priority">
+                  {{ priority }}
+                </option>
+              </select>
+            </td>
+            <td>
+              <a style="cursor: pointer; color: dodgerblue" (click)="openEditTaskPage(task)">Edit</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

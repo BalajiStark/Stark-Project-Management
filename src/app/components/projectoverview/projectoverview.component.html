@@ -1,0 +1,63 @@
+<div class="container mt-4">
+  <div class="p-4 bg-light rounded shadow-sm">
+    <h2 class="mb-2 text-primary">
+      {{ projectDetails.name }}
+    </h2>
+    <p class="text-muted"> {{ projectDetails.description }}</p>
+
+    <div class="mt-3 d-flex align-items-center">
+      <div class="me-3 d-flex align-items-center">
+        <label for="assigneeDropdown" class="form-label me-2">Assignee:</label>
+        <select [(ngModel)]="selectedAssignee" id="assigneeDropdown" class="form-select form-select-sm w-auto" style="margin-bottom: 5px">
+          <option *ngFor="let assignee of assignees" [value]="assignee">
+            {{ assignee }}
+          </option>
+        </select>
+      </div>
+      <div class="d-flex align-items-center">
+        <label for="statusDropdown" class="form-label me-2">Status:</label>
+        <select [(ngModel)]="selectedStatus" id="statusDropdown" class="form-select form-select-sm w-auto" style="margin-bottom: 5px">
+          <option *ngFor="let s of status" [value]="s">
+            {{ s }}
+          </option>
+        </select>
+      </div>
+      <div class="d-flex align-items-center" style="margin-left: 10px">
+        <label for="priorityDropdown" class="form-label me-3">Priority:</label>
+        <select [(ngModel)]="selectedPriority" id="priorityDropdown" class="form-select form-select-sm w-auto" style="margin-bottom: 5px">
+          <option *ngFor="let priority of priorities" [value]="priority">
+            {{ priority }}
+          </option>
+        </select>
+        <button (click)="clearFilters()" class="btn btn-sm btn-outline-secondary ms-3" style="margin-bottom: 5px">Clear Filters</button>
+      </div>
+      <div class="d-flex align-items-center" style="margin-left: 10px">
+        <label for="sortDropdown" class="form-label me-3">Sort by:</label>
+        <select [(ngModel)]="selectedSort" id="sortDropdown" class="form-select form-select-sm w-auto" style="margin-bottom: 5px">
+          <option *ngFor="let sort of sortingProperties" [value]="sort">
+            {{ sort }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="d-flex align-items-center gap-4 w-75 mx-auto mt-3">
+      <div>
+        <span class="badge bg-secondary me-2">Not Started : </span>
+        <span>{{ statusCount.notStarted }}</span>
+      </div>
+      <div>
+        <span class="badge bg-primary me-2">In Progress : </span>
+        <span>{{ statusCount.inProgress }}</span>
+      </div>
+      <div>
+        <span class="badge bg-success me-2">Done : </span>
+        <span>{{ statusCount.done }}</span>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<app-taskslist [tasks]="projectDetails.tasks" [assignee]="selectedAssignee" [priority]="selectedPriority"
+               [status]="selectedStatus" [sort]="selectedSort" (statusCounts)="receiveCounts($event)"></app-taskslist>

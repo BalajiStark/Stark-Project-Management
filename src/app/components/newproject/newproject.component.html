@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center align-items-center mb-3">
+  <h5 class="mb-0">Add New Project</h5>
+</div>
+<form [formGroup]="projectForm" (ngSubmit)="submitForm()" class="p-4 border rounded w-75 mx-auto mt-4">
+
+  <div class="mb-3">
+    <label>Name</label>
+    <input type="text" class="form-control" formControlName="name">
+    <div class="text-danger" *ngIf="f['name'].touched && f['name'].invalid">
+      Name is required
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label>Description</label>
+    <textarea class="form-control" formControlName="description"></textarea>
+    <div class="text-danger" *ngIf="f['description'].touched && f['description'].invalid">
+      Description is required
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label>Start Date</label>
+      <input type="date" class="form-control" formControlName="startDate">
+      <div class="text-danger" *ngIf="f['startDate'].touched && f['startDate'].invalid">
+        Start Date is required
+      </div>
+    </div>
+
+    <div class="col-md-6 mb-3">
+      <label>End Date</label>
+      <input type="date" class="form-control" formControlName="endDate">
+      <div class="text-danger" *ngIf="f['endDate'].touched && f['endDate'].invalid">
+        End Date is required
+      </div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label>Team Members</label>
+    <div formArrayName="teamMembers">
+      <div *ngFor="let member of teamMembers.controls; let i = index" class="d-flex mb-2">
+        <input type="text" class="form-control me-2" [formControlName]="i">
+        <button type="button" class="btn btn-danger btn-sm" (click)="removeTeamMember(i)" *ngIf="teamMembers.length > 1">Remove</button>
+      </div>
+      <button type="button" class="btn btn-primary btn-sm" (click)="addTeamMember()">Add Member</button>
+    </div>
+  </div>
+
+  <button class="btn btn-success mt-3" type="submit" [disabled]="projectForm.invalid">Submit</button>
+</form>
