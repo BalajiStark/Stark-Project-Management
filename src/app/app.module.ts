@@ -23,17 +23,17 @@ import { AuthGuard } from './shared/services/auth.guard';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  //{
-    // path: '',
-    // //canActivate: [AuthGuard],
-    // children: [
+  {
+    path: '',
+    canActivate: [AuthGuard],
+    children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'projects/:id/tasks', component: ProjectoverviewComponent },
       { path: 'newproject', component: NewprojectComponent },
       { path: 'projects/:id/tasks/newtask/:taskid', component: NewtaskComponent },
       { path: 'projects/:id/tasks/newtask', component: NewtaskComponent }
-    // ]
-  // }
+    ]
+  }
 ];
 
 

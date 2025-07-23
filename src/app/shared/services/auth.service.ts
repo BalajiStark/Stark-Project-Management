@@ -9,7 +9,7 @@ export class AuthService {
 
   login(username: string, password: string): boolean {
     // Replace with real login logic
-    if (username === 'Balaji Stark' && password === 'Starkishere') {
+    if (username === 'Tony Stark' && password === 'IamIronman') {
       this.isLoggedInStatus = true;
       return true;
     }

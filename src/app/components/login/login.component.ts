@@ -19,7 +19,12 @@ export class LoginComponent {
     if (success) {
       this.router.navigate(['/dashboard']);
     } else {
+      window.alert('Login failed. Please check your credentials.');
       this.loginFailed = true;
     }
+  }
+
+  popupAlert() {
+    window.alert('This feature is not implemented yet. Please contact support for assistance.');
   }
 }
